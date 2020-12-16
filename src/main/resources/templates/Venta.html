@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Nueva Venta</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    </head>
+    <body>
+        <div class="container mt-4">
+            <div style="width: 80%;margin: auto;">
+                <a th:href="@{/}">Listado</a>
+            </div>
+            <div class="card" style="width: 80%;margin: auto;">
+                <div class="card-body"> 
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-white"  style="background: #007BFF;font-size: 20px;margin: 7px;">Nueva Venta</li>
+                        <li class="list-group-item" style="visibility: hidden;"></li>
+                        <li class="list-group-item" >
+                            <form th:action="@{/GuardarVenta}" method="post"  th:object="${venta}">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Articulo</label>
+                                    <div class="col-sm-10">
+                                        <select th:field="*{artefacto.codart}" class="form-control">
+                                            <option  th:each="art : ${listaArtefacto}"
+                                                     th:value="${art.codart}"
+                                                     th:utext="${art.nomart}" />
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Cliente</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"  class="form-control" th:field="*{cliente}" required="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Meses</label>
+                                    <div class="col-sm-10">
+                                        <input type="number"  class="form-control"  th:field="*{meses}" min="1">
+                                    </div>
+                                </div>
+                                <input type="submit" value="Guardar" class="btn btn-primary">
+                                <input type="reset" value="Nuevo" class="btn btn-danger">
+                            </form>
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

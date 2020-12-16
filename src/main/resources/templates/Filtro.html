@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Consultar Ventas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <div class="container-fluid mt-4">
+        <!--    <h5>Registros encontrados : <span th:text="${listaVenta.size()}">5</span></h5> -->
+            <table class="table table-hover" id="TableVenta">
+                <thead   style="background: #007BFF;" class="text-white">
+                    <tr>
+                        <th>Factura</th>
+                        <th>Cliente</th>
+                        <th>Artefacto</th>
+                        <th>Fecha</th>
+                        <th>Meses</th>
+                        <th>Precio</th>
+                        <th>Interes</th>
+                        <th>Saldo</th>
+                        <th>Cuota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="venta : ${listaVenta}">
+                        <td th:text="${venta.NumFac()}"></td>
+                        <td th:text="${venta.cliente}"></td>
+                        <td th:text="${venta.artefacto.nomart}"></td>
+                        <td th:text="${venta.fecha}"></td> 
+                        <td th:text="${venta.meses}"></td>
+                        <td th:text="${venta.artefacto.preart}"></td>
+                        <td th:text="${#numbers.formatDecimal(venta.Interes(),2,2)}"></td>
+                        <td th:text="${#numbers.formatDecimal(venta.Saldo(),2,2)}"></td>
+                        <td th:text="${#numbers.formatDecimal(venta.Cuota(),2,2)}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+    <script>
+        $(document)
+                .ready(
+                        function () {
+                            var table = $('#TableVenta')
+                                    .DataTable(
+                                            {
+                                                language: {
+                                                    "lengthMenu": "Mostrar _MENU_ registros",
+                                                    "zeroRecords": "No se encontraron resultados",
+                                                    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                                    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                                    "sSearch": "Buscar:",
+                                                    "oPaginate": {
+                                                        "sFirst": "Primero",
+                                                        "sLast": "Último",
+                                                        "sNext": "Siguiente",
+                                                        "sPrevious": "Anterior"
+                                                    },
+                                                    "sProcessing": "Procesando...",
+                                                }
+                                            });
+
+                            table.buttons().container().appendTo(
+                                    '#example_wrapper .col-md-6:eq(0)');
+                        });
+    </script>
+</html>
